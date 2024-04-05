@@ -76,7 +76,7 @@ server <- function(input, output) {
     
     if (distribution == "Normal Distribution (n ≥ 30 or known σ)") {
       z_score <- qnorm(confidence + (1 - confidence) / 2)
-    } else if (distribution == "t-Distribution") {
+    } else if (distribution == "t-Distribution (n < 30 and unknown σ)") {
       z_score <- qt(confidence + (1 - confidence) / 2, df = size - 1)
     }
     
@@ -114,7 +114,7 @@ server <- function(input, output) {
     lower_bound <- mean - error_margin
     upper_bound <- mean + error_margin
     
-    sprintf("With a sample mean of %s, we are %s%% confident that the interval (%.4f, %.4f) captures the true population mean.", 
+    sprintf("With a sample mean of %s, we are %s%% confident the interval (%.3f, %.3f) captures the true population mean.", 
             mean, 
             confidence * 100, 
             lower_bound, 
